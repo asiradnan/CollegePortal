@@ -1,0 +1,15 @@
+{%extends 'base.html'%}
+{%block title%}College Home{%endblock%}
+{%block header%}Alauddin Academy{%endblock%}
+{%block content%}
+    <h1 align="center">Welcome to Alauddin Academy</h1>
+    {% if user.is_authenticated and user.student or  user.teacher or user.principal%}
+    
+    {%elif user.is_authenticated%}
+        <h4 align="center">You are a guest</h4>
+        <h4 align="center"><a href="{%url 'Academics:student'%}">Register as a Student</a></h4>
+        <h4 align="center"> <a href="{%url 'Academics:teacher'%}">Register as a Teacher</a></h4>
+    {%else%} Kindly, Log In or Create An Account
+    {%endif%}
+    
+{%endblock%}

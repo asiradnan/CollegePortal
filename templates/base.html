@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block title%}{%endblock%}</title>
+    <link rel="stylesheet" href="/static/CollegeWebsite/styles.css">
+</head>
+<body>
+    <header>
+        <h1>{%block header%}{%endblock%}</h1>
+    </header>
+    
+    <nav>
+        <ul>
+            <li>{% if user.is_authenticated%}
+                    {% if user.student%} 
+                        <a href="{% url 'Academics:user_profile' %}">{{user.username}}(Student)</a>
+                    {% elif user.teacher%}
+                    <a href="{% url 'Academics:user_profile' %}">{{user.username}}(Teacher)</a>  
+                    {% elif user.principal%}
+                    <a href="{% url 'Academics:user_profile' %}">{{user.username}}(Principal)</a>  
+                    {%elif user.is_staff%} {{user.username}}(Staff)
+                    {% else%} {{user.username}} (Guest)
+                    {%endif%}
+                {%else%} Not logged in
+                {%endif%}
+            </li>
+            <li><a href="{% url 'home'%}">Home</a></li>
+            <li><a href="{%url 'about'%}">About</a></li>
+            <li><a href="{%url 'contact_us'%}">Contact</a></li>
+            <li><a href="{%url 'Club:club_home'%}">Clubs</a></li>
+            <li><a href="{%url 'Notice:notice'%}">Notice</a> </li>
+            <li><a href="{%url 'PostsNQueries:PnQ_home'%}">Posts & Queries</a></li>
+            <li><a href="{% url 'Academics:departments'%}">Departments</a></li>
+            <li><a href="{% url 'Academics:classes'%}">Classes</a></li>
+            
+            
+            {% if user.is_authenticated%}<li> <a href="{%url 'account_logout'%}">Logout</a></li>
+            {%else%}<li><a href="{%url 'account_login'%}">Login</a></li>
+                    <li><a href="{%url 'account_signup'%}">Signup</a></li>
+            {%endif%}
+        </ul>      
+    </nav>
+
+    <section id="main-content" class="with-background">
+        {%block content%}
+
+        {%endblock%}
+    </section>
+    <footer>      
+        <p>&copy; 2023 Alauddin Academy. All rights reserved.</p>
+    </footer>
+</body>
+</html>
