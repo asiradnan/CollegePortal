@@ -1,0 +1,27 @@
+{%extends 'base.html'%}
+
+{%block title%}  Class-{{class}}{%endblock%}
+
+{%block header%}Class-{{class}}{%endblock%}
+{%block content%}
+<div class="lists">
+{%if class.student_set.all%}
+    {%if class.student_set.count == 1%}  There is <b>1</b> Student in <b>{{class}}</b>
+    {%else%} There are <b>{{class.student_set.count}}</b> Students are in <b>{{class}}</b>
+    {%endif%}
+
+    <br> <br>
+    {%for student in class.student_set.all%}
+        {% if student.is_captain%} <b>{{student}} (C)</b>
+        {%else%} {{student}}
+        {%endif%}
+        - {{student.student_id}} &nbsp
+        {% if user.teacher %}  
+            <a href="{% url 'Academics:make_captain' student_id=student.user.id %}"> Make Captain</a> &nbsp
+            <a href="{% url 'Academics:student_profile' user_id=student.user.id %}">View Profile</a>
+        {% endif %}<br>
+    {%endfor%}
+{%else%}<b>No student in this class yet.</b> 
+{%endif%}
+</div>
+{%endblock%}

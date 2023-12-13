@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{%block title%} Profile Update {%endblock%}
+{%block header%} Update Profile{%endblock%}
+{% block content %}
+    <h2 style="color:#c28b00">User Profile</h2>
+    <div class='formbody'>
+        <form method="post" action="{% url 'Academics:update_teacher_profile' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value=" Save ">
+        </form>
+    </div>
+    
+{% endblock %}

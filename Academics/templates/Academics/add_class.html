@@ -1,0 +1,17 @@
+{%extends 'base.html'%}
+
+{%block title%}  New class {%endblock%}
+
+{%block header%}Class Room{%endblock%}
+
+{%block content%}
+    {%if user.principal or user.teacher%}
+    <form method="POST" class="form">
+        {%csrf_token%}
+        {{form.as_p}}<br>
+        <input type="submit" value=" Create Class ">
+    </form>
+    {%else%} 
+    <p>You are not a teacher</p>
+    {%endif%}
+{%endblock%}

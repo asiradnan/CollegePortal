@@ -1,0 +1,18 @@
+{%extends 'base.html'%}
+
+{%block title%}  Departments {%endblock%}
+
+{%block header%}Departments{%endblock%}
+{%block content%}
+{% if  user.principal%} <a href="{%url 'Academics:department'%}">Add a new Department!</a><br><br><br>{%endif%}
+<div class="lists">
+    {%if departments%}
+    
+    <b>{{departments.count}} Departments are listed:</b><br><br>
+    {%for d in departments%} 
+        <a href="{%url 'Academics:dept_detail' name=d.name%}">{{d}}</a><br>
+    {%endfor%}
+    {%else%} <b>No department is available</b>
+    {%endif%}
+</div>
+{%endblock%}

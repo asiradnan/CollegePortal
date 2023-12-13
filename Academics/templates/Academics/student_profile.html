@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title%} Student Information {%endblock%}
+{% block header%} Student Information {%endblock%}
+{%block content%}
+<div class="table">
+    <h2 style="color:#574501">Student Profile</h2>
+        <table>
+            <tbody>
+                <br><br>
+                <tr>
+                    <th>Name:</th>
+                    <td>{{student.name}}</td>
+                </tr>
+                <tr>
+                    <th>Student ID:</th>
+                    <td>{{student.student_id}}</td>
+                </tr>
+                <tr>
+                    <th>Class Room:</th>
+                    <td>Room no:{{student.CLASS.room_number}},<br>Building no:{{student.CLASS.building_number}}</td>
+                </tr>
+                {%for contact in student.user.contactnumber_set.all%}
+                    <tr>
+                        <th>Contact {{ forloop.counter }}:</th>
+                        <td>{{contact}}</td>
+                    </tr>              
+                {%endfor%}
+            </tbody>
+        </table>
+</div>
+{%endblock%}

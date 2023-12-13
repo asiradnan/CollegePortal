@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{%block title%} Profile {%endblock%}
+{%block header%} Profile {%endblock%}
+{% block content %}
+    <div class="table">
+    {%if user.principal%}
+    <h2 style="color:#574501">My Profile ({{user.username}})</h2>
+        <table>
+            <tbody>
+                <br><br>
+                <tr>
+                    <th>Name:</th>
+                    <td>{{user.principal.name}}</td>
+                </tr>
+                <tr>
+                    <th>Designation:</th>
+                    <td>{{user.principal.designation}}</td>
+                </tr>
+                <tr>
+                    <th>Address:</th>
+                    <td>{{user.principal.address}}</td>
+                </tr>
+                <tr>
+                    <th>Room:</th>
+                    <td>Room no:{{user.principal.room_number}},<br>Building no:{{user.principal.building_number}}</td>
+                </tr>
+                {%for contact in user.contactnumber_set.all%}
+                    <tr>
+                        <th>Contact {{ forloop.counter }}:</th>
+                        <td>{{contact}}</td>
+                    </tr>
+                    
+                {%endfor%}
+            </tbody>
+        </table>
+        <br>
+        <br>
+        <a href="{%url 'Academics:update_principal_profile'%}"><button> Update Profile </button></a><br><br>
+        <a href="{%url 'Academics:add_contact' %}"> Add a new Contact </a>
+    {%elif user.teacher%}
+    <h2 style="color:#574501">My Profile ({{user.username}})</h2>
+
+        <table>
+            <tbody>
+                <tr>
+                    <th>Name:</th>
+                    <td>{{user.teacher.name}}</td>
+                </tr>
+                <tr>
+                    <th>Department:</th>
+                    <td>{{user.teacher.dept_name}}</td>
+                </tr>
+                <tr>
+                    <th>Address:</th>
+                    <td>{{user.teacher.address}}</td>
+                </tr>
+                <tr>
+                    <th>Room:</th>
+                    <td>Room no:{{user.teacher.dept_name.room_number}},<br>Building no:{{user.teacher.dept_name.building_number}}</td>
+                </tr>
+                {%for contact in user.contactnumber_set.all%}
+                    <tr>
+                        <th>Contact {{ forloop.counter }}:</th>
+                        <td>{{contact}}</td>
+                    </tr> 
+                {%endfor%}
+            </tbody>
+        </table>
+        <br>
+        <br>
+        <a href="{%url 'Academics:update_teacher_profile'%}"><button> Update Profile </button> </a><br><br>
+        <a href="{%url 'Academics:add_contact' %}"> Add a new Contact </a>
+    {%elif user.student%}
+    <h2 style="color:#574501">My Profile ({{user.username}})</h2>
+            <table>
+                <tbody>
+                    <tr>
+                        <th>Name:</th>
+                        <td>{{user.student.name}}</td>
+                    </tr>
+                    <tr>
+                        <th>Class:</th>
+                        <td>{{user.student.CLASS}}
+                            {%if user.student.is_captain%} (Captain) {%endif%}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Address:</th>
+                        <td>{{user.student.address}}</td>
+                    </tr>
+                    <tr>
+                        <th>Class Room:</th>
+                        <td>Room no:{{user.student.CLASS.room_number}},<br>Building no:{{user.student.CLASS.building_number}}</td>
+                    </tr>
+                    {%for contact in user.contactnumber_set.all%}
+                    <tr>
+                        <th>Contact {{ forloop.counter }}:</th>
+                        <td>{{contact}}</td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+            <br>
+            <br>
+            <a href="{%url 'Academics:update_student_profile'%}"><button> Update Profile </button></a><br><br>
+            <a href="{%url 'Academics:add_contact' %}"> Add a new Contact </a>
+    {%else%}<strong>You do not have a profile</strong> 
+    {%endif%}
+    </div>
+{% endblock %}

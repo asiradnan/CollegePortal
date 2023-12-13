@@ -1,0 +1,15 @@
+{%extends 'base.html'%}
+
+{%block title%}  Principal Registration {%endblock%}
+
+{%block header%}Registration{%endblock%}
+
+{%block content%}
+    <form method="POST">
+        {%csrf_token%}
+        {{form.as_p}}
+        {{form2.as_p}}
+        <br>
+        <input type="submit" value=" Register ">
+    </form>
+{%endblock%}

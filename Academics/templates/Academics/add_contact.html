@@ -1,0 +1,17 @@
+{%extends 'base.html'%}
+
+{%block title%}  Add Contact {%endblock%}
+
+{%block header%}Add new Contact{%endblock%}
+
+{%block content%}
+    {%if user.principal or user.teacher or user.student%}
+    <form method="POST" class="form">
+        {%csrf_token%}
+        {{form.as_p}}<br>
+        <input type="submit" value=" Add Contact ">
+    </form>
+    {%else%} 
+    <p>You are not registered</p>
+    {%endif%}
+{%endblock%}

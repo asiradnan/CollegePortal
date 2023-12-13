@@ -1,0 +1,17 @@
+{%extends 'base.html'%}
+
+{%block title%}  Classes {%endblock%}
+
+{%block header%}Classes{%endblock%}
+{%block content%}
+{% if user.teacher or user.principal%} <a href="{%url 'Academics:add_class'%}">Add a new Class!</a><br><br><br>{%endif%}
+<div class="lists">
+    {%if classes%}
+    <b>{{classes.count}} Classes are listed below:</b><br><br>
+        {%for class in classes%} 
+        <a href="{%url 'Academics:class_detail' class_code=class.class_code%}">{{class}}</a><br>
+        {%endfor%}
+    {%else%} <b>No class available</b>
+    {%endif%}
+</div>
+{%endblock%}

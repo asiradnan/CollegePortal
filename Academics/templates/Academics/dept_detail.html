@@ -1,0 +1,19 @@
+{%extends 'base.html'%}
+
+{%block title%}  {{dept}}{%endblock%}
+
+{%block header%}{{dept}}{%endblock%}
+{%block content%}
+<div class="lists">
+{%if dept.teacher_set.all%}
+    {% if dept.teacher_set.count == 1 %} There is {{dept.teacher_set.count}} teacher in {{dept}} Department. 
+    {%else%} There are {{dept.teacher_set.count}} teachers in {{dept}} Department.
+    {%endif%}
+    <br><br>
+    {%for teacher in dept.teacher_set.all%}
+        {{teacher}} &nbsp {{teacher.designation}} &nbsp {{teacher.user.email}} &nbsp {{teacher.dept_designation}} <br>
+    {%endfor%}
+{%else%}<b>No teacher in this department yet.</b> 
+{%endif%}
+</div>
+{%endblock%}

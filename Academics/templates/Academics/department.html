@@ -1,0 +1,18 @@
+{%extends 'base.html'%}
+
+{%block title%}  New Department {%endblock%}
+
+{%block header%}Departments{%endblock%}
+
+{%block content%}
+
+    {%if user.principal%}
+    <form method="POST">
+        {%csrf_token%}
+        {{form.as_p}}
+        <input type="submit" value="SUBMIT">
+    </form>
+    {%else%} 
+    <p>You are not principal</p>
+    {%endif%}
+{%endblock%}
