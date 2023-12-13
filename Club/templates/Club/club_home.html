@@ -1,0 +1,27 @@
+{%extends 'base.html'%}
+
+{%block title%}  College Clubs  {%endblock%}
+
+{%block header%}College Clubs{%endblock%}
+
+{%block content%}
+    {% if messages %}
+        {% for message in messages %}
+        <h3 style="color:rgb(248, 221, 180);">{{ message }}</h3>
+        {% endfor %}
+    {% endif %}
+    {% if user.teacher%} <a href="{%url 'Club:club_reg'%}">Create Club</a><br><br><br>
+    {%endif%}
+    {% if user.student%} <a href="{%url 'Club:membership'%}">Get in a Club!</a><br><br><br>
+    {%endif%}
+    <div class="lists">
+        {%if clubs%}
+        We have <i>{{clubs.count}}</i> Clubs! <br>
+        <br><b>List of our Clubs:</b><br><br>
+        {%for i in clubs%}
+           <p><a href="{% url 'Club:club_detail' club_name=i.club_name%}">{{i.club_name}} </a> </p>
+        {%endfor%}
+        {%else%}<b> No club is created yet</b>
+        {%endif%}
+    </div> 
+{%endblock%}

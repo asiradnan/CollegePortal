@@ -1,0 +1,18 @@
+{%extends 'base.html'%}
+
+{%block title%}  {{club.club_name}} Club{%endblock%}
+
+{%block header%}{{club.club_name}} Club {%endblock%}
+{%block content%}
+<div class="lists">
+This club was established in : {{club.established}}<br>
+<br> The club is supervised by <b style="color:#457802;">{{club.supervisor }} ({{club.supervisor.dept_name}})</b> <br><br>
+{%if memberships%}
+    {{memberships.count}} Member in this club<br><br>
+    {%for membership in memberships%}
+        {{membership.student}}-{{membership.position}} <br>
+    {%endfor%}
+{%else%}<b>No club members in this club yet.</b> 
+{%endif%}
+</div>
+{%endblock%}
