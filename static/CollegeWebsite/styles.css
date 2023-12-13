@@ -1,0 +1,252 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+header {
+    background-color: #e1a817; /* Darker Mustard Yellow */
+    color: #333;
+    text-align: center;
+    padding: 0.5em; /* Adjust the padding to make the header smaller */
+}
+
+nav {
+    background-color: #c28b00; /* Mustard Yellow */
+    padding: 0.5em;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    display: inline;
+    margin-right: 10px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    padding: 8px 12px;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #e1a817;
+}
+
+section {
+    position: relative;
+    padding: 70px 20px 20px; 
+    text-align: center;
+    color: #fff; 
+}
+section a {
+    color: #fff; 
+    transition: color 0.3s;
+}
+
+section a:hover {
+    color: #e1a817; 
+}
+.with-background {
+    background: url('./college.jpg') center/cover no-repeat fixed; 
+    min-height: 100vh; 
+    /* display: flex;
+    flex-direction: column;
+    justify-content: space-between; */
+}
+
+footer {
+    background-color: #e1a817;
+    color: #fff;
+    text-align: center;
+    padding: 1em;
+    width: 100%;
+}
+.post {
+    background-color: #e1a817; 
+    border-radius: 8px;
+    margin-bottom: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    width: 60%;
+    margin: 20px auto; 
+
+}
+
+.post-header {
+    margin-bottom: 10px;
+}
+
+.post-header h2 {
+    color: #fff; 
+    margin-bottom: 5px; 
+}
+
+.post-header p {
+    color: #27ae60; 
+    margin: 0; 
+}
+
+.post-content {
+    color: #333; 
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 50%;
+    margin: 20px auto; 
+}
+.post-content-teacher {
+    color: red; 
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px red;
+    width: 50%;
+    margin: 20px auto; 
+}
+.notice{
+    background-color: rgb(186, 175, 175); 
+    color:#000000;
+    font-family: Arial, sans-serif;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    color:#333;
+    width: 50%;
+    margin: 20px auto; 
+}
+.notice a{
+    color:#000000;
+}
+.lists{
+
+    background-color: #e1a817; 
+    border-radius: 8px;
+    margin-bottom: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color:#333;
+    width: 50%;
+    margin: 20px auto; 
+}
+
+input[type='submit']:hover{
+    background-color: #e1a817; 
+    border: 2px solid #333;
+    color:#fff;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.table {
+    margin: 20px auto;
+    width: 70%;
+    background-color: #e1a817;
+    border-radius: 10px;
+    padding: 8% 0%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 40%;
+    min-width: 200px;
+    border-collapse: separate;
+    border-spacing: 0;
+    text-align: left;
+    margin: 0 auto;
+}
+
+th, td {
+    padding: 10px;
+    color: #333;
+    border: none; /* Remove default table borders */
+}
+
+th {
+    font-size: 18px;
+    color: #333;
+}
+
+/* comment */
+a button:hover{
+    background-color: #e1a817; 
+    color:#fff;
+    
+}
+
+form {
+    background-color: #e1a817;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 450px;
+    margin: 20px auto; /* Center the form horizontally */
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 20px; /* Adjust the font size for labels */
+    color:#fff;
+}
+
+input,
+select,textarea {
+    width: calc(100% - 16px); /* Adjust the width and add some space for borders */
+    padding: 6px;
+    margin-bottom: 2px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 17px; /* Adjust the font size for input fields */
+}
+
+form button:hover{
+    background-color: #e1a817; 
+    border: 2px solid #333;
+    color:#fff;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.add-comment form{
+    background-color: none;
+    padding: 0px;
+    border-radius: 8px;
+    box-shadow: none;
+    margin: 20px auto; 
+}
+form a:hover{
+    font-weight: bold;
+    font-style: italic;
+    color :#fff;
+}
+.lists a:hover{
+    color: #fff;
+    font-weight: bold;
+}
+.lists a{
+    text-decoration: none;
+}
+.about{
+    font-size: 20px;
+    background-color: #fff;
+    color:#333;
+}
+.about_img{
+    background-color: #e1a817;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: none;
+    margin: 20px auto; 
+    /* width: 90%; */
+    color: #000000;
+}
