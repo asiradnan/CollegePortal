@@ -1,0 +1,17 @@
+{%extends 'base.html'%}
+
+{%block title%}  Create Post {%endblock%}
+
+{%block header%}Posts & Queries{%endblock%}
+
+{%block content%}
+ {%if user.is_authenticated%}
+    <form method="POST" enctype="multipart/form-data">
+        {%csrf_token%}
+        {{form.as_p}}
+        <br>
+        <input type="submit" value=" Post ">
+    </form>
+{%else%} Please Log In or Sign Up to make a post.
+{%endif%}
+{%endblock%}

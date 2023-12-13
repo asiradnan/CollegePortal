@@ -1,0 +1,53 @@
+{%extends 'base.html'%}
+
+{%block title%}  Posts & Queries {%endblock%}
+
+{%block header%}Posts & Queries{%endblock%}
+
+{%block content%}
+    {% if user.teacher or user.student or user.principal%} <h3><a href="{%url 'PostsNQueries:create_post'%}">Create Post</a></h3></b><br><br>
+    {%endif%}
+    {% if posts %}
+        {% for post in posts %}   
+            <div class="post">
+                <div class="post-header">
+                    <h2>{{ post.posted_by }}</h2>
+                    <p>{% load tz %}{{ post.time|date:"F d, Y" }} {% load tz %}({{ post.time|time:"g:i:s A" }})</p>
+                </div>
+                {% if post.posted_by.teacher%}
+                <div class="post-content-teacher">
+                    <p>{{ post.content }}</p>
+                    {%if post.image%} <img src="{{post.image.url}}" alt="image" height='250' width='300'>
+                    {%endif%}
+                </div>
+                {%else%}
+                <div class="post-content">
+                    <p>{{ post.content }}</p>
+                    {%if post.image%} <img src="{{post.image.url}}" alt="image" height='250' width='300'>
+                    {%endif%}
+                </div>
+                {%endif%}
+                <div class="comments">
+                    <br><h3><i>Comments</i></h3>
+                    {% for comment in post.comments.all%}
+                
+                    <br><u>{% load tz %}{{ comment.time|time:"g:i A" }}</u> <strong>   {{ comment.commented_by }}:</strong> {{ comment.content }}
+                        
+                        {% endfor %}
+                </div>
+                {%if user.is_authenticated%}
+                <div class="add-comment">
+                    <form method="POST" action="{% url 'PostsNQueries:add_comment' post_serial=post.post_serial %}">
+                        {% csrf_token %}
+                        <textarea name="content" id="comment_content" required></textarea><br>
+                        <button type="submit">Comment</button>
+                    </form>
+                </div>
+                {%else%} <strong>Login or Signup to comment</strong>
+                {%endif%}
+            </div>            
+        {% endfor %}
+    {% else %}
+        <p>No posts available.</p>
+    {% endif %}
+{%endblock%}
