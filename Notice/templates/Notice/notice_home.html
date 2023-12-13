@@ -1,0 +1,25 @@
+{%extends 'base.html'%}
+
+{%block title%}  Notices {%endblock%}
+
+{%block header%}Notice Board{%endblock%}
+
+{%block content%}
+    {% if user.teacher or user.principal%} <a href="{%url 'Notice:make_notice'%}">Publish a Notice</a><br>
+    {%endif%}
+    {% if notices|length == 0 %} <b>No Notice</b>
+    {%else%} <h3>Notices</h3><br><br>
+    {%endif%}
+    {%for notice in notices%}
+        <div class="notice">
+        <b>{{notice.title}}</b><br>
+        <div style="font-size: 16px;">{% load tz %}{{ notice.date|date:"d F Y" }}<br><br></div>
+        {{notice.content}}
+        {% if notice.pdf_file %}
+        <br><a href="{{ notice.pdf_file.url }}" target="_blank">Open PDF</a>
+        {% endif %}
+        <br>
+        </div>
+        
+    {%endfor%}
+{%endblock%}
