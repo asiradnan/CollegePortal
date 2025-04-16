@@ -1,110 +1,123 @@
 {% extends 'base.html' %}
-{%block title%} Profile {%endblock%}
-{%block header%} Profile {%endblock%}
-{% block content %}
-    <div class="table">
-    {%if user.principal%}
-    <h2 style="color:#574501">My Profile ({{user.username}})</h2>
-        <table>
-            <tbody>
-                <br><br>
-                <tr>
-                    <th>Name:</th>
-                    <td>{{user.principal.name}}</td>
-                </tr>
-                <tr>
-                    <th>Designation:</th>
-                    <td>{{user.principal.designation}}</td>
-                </tr>
-                <tr>
-                    <th>Address:</th>
-                    <td>{{user.principal.address}}</td>
-                </tr>
-                <tr>
-                    <th>Room:</th>
-                    <td>Room no:{{user.principal.room_number}},<br>Building no:{{user.principal.building_number}}</td>
-                </tr>
-                {%for contact in user.contactnumber_set.all%}
-                    <tr>
-                        <th>Contact {{ forloop.counter }}:</th>
-                        <td>{{contact}}</td>
-                    </tr>
-                    
-                {%endfor%}
-            </tbody>
-        </table>
-        <br>
-        <br>
-        <a href="{%url 'Academics:update_principal_profile'%}"><button> Update Profile </button></a><br><br>
-        <a href="{%url 'Academics:add_contact' %}"> Add a new Contact </a>
-    {%elif user.teacher%}
-    <h2 style="color:#574501">My Profile ({{user.username}})</h2>
+{% block title %}Profile{% endblock %}
+{% block header %}Profile{% endblock %}
 
-        <table>
-            <tbody>
-                <tr>
-                    <th>Name:</th>
-                    <td>{{user.teacher.name}}</td>
-                </tr>
-                <tr>
-                    <th>Department:</th>
-                    <td>{{user.teacher.dept_name}}</td>
-                </tr>
-                <tr>
-                    <th>Address:</th>
-                    <td>{{user.teacher.address}}</td>
-                </tr>
-                <tr>
-                    <th>Room:</th>
-                    <td>Room no:{{user.teacher.dept_name.room_number}},<br>Building no:{{user.teacher.dept_name.building_number}}</td>
-                </tr>
-                {%for contact in user.contactnumber_set.all%}
+{% block content %}
+<div class="max-w-3xl mx-auto bg-white shadow-md rounded-lg p-6 space-y-6">
+
+    {% if user.principal %}
+        <h2 class="text-2xl font-semibold text-primary-700">My Profile ({{ user.username }})</h2>
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200 text-sm">
+                <tbody class="divide-y divide-gray-100">
                     <tr>
-                        <th>Contact {{ forloop.counter }}:</th>
-                        <td>{{contact}}</td>
-                    </tr> 
-                {%endfor%}
-            </tbody>
-        </table>
-        <br>
-        <br>
-        <a href="{%url 'Academics:update_teacher_profile'%}"><button> Update Profile </button> </a><br><br>
-        <a href="{%url 'Academics:add_contact' %}"> Add a new Contact </a>
-    {%elif user.student%}
-    <h2 style="color:#574501">My Profile ({{user.username}})</h2>
-            <table>
-                <tbody>
-                    <tr>
-                        <th>Name:</th>
-                        <td>{{user.student.name}}</td>
+                        <th class="text-left py-2 pr-4 font-medium text-gray-700">Name:</th>
+                        <td class="py-2">{{ user.principal.name }}</td>
                     </tr>
                     <tr>
-                        <th>Class:</th>
-                        <td>{{user.student.CLASS}}
-                            {%if user.student.is_captain%} (Captain) {%endif%}
+                        <th class="text-left py-2 pr-4 font-medium text-gray-700">Designation:</th>
+                        <td class="py-2">{{ user.principal.designation }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-left py-2 pr-4 font-medium text-gray-700">Address:</th>
+                        <td class="py-2">{{ user.principal.address }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-left py-2 pr-4 font-medium text-gray-700">Room:</th>
+                        <td class="py-2">Room no: {{ user.principal.room_number }},<br>Building no: {{ user.principal.building_number }}</td>
+                    </tr>
+                    {% for contact in user.contactnumber_set.all %}
+                    <tr>
+                        <th class="text-left py-2 pr-4 font-medium text-gray-700">Contact {{ forloop.counter }}:</th>
+                        <td class="py-2">{{ contact }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mt-6 flex flex-col sm:flex-row gap-4">
+            <a href="{% url 'Academics:update_principal_profile' %}" class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-md text-center">Update Profile</a>
+            <a href="{% url 'Academics:add_contact' %}" class="text-primary-600 hover:underline text-center">Add a new Contact</a>
+        </div>
+
+    {% elif user.teacher %}
+        <h2 class="text-2xl font-semibold text-primary-700">My Profile ({{ user.username }})</h2>
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200 text-sm">
+                <tbody class="divide-y divide-gray-100">
+                    <tr>
+                        <th class="text-left py-2 pr-4 font-medium text-gray-700">Name:</th>
+                        <td class="py-2">{{ user.teacher.name }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-left py-2 pr-4 font-medium text-gray-700">Department:</th>
+                        <td class="py-2">{{ user.teacher.dept_name }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-left py-2 pr-4 font-medium text-gray-700">Address:</th>
+                        <td class="py-2">{{ user.teacher.address }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-left py-2 pr-4 font-medium text-gray-700">Room:</th>
+                        <td class="py-2">Room no: {{ user.teacher.dept_name.room_number }},<br>Building no: {{ user.teacher.dept_name.building_number }}</td>
+                    </tr>
+                    {% for contact in user.contactnumber_set.all %}
+                    <tr>
+                        <th class="text-left py-2 pr-4 font-medium text-gray-700">Contact {{ forloop.counter }}:</th>
+                        <td class="py-2">{{ contact }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mt-6 flex flex-col sm:flex-row gap-4">
+            <a href="{% url 'Academics:update_teacher_profile' %}" class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-md text-center">Update Profile</a>
+            <a href="{% url 'Academics:add_contact' %}" class="text-primary-600 hover:underline text-center">Add a new Contact</a>
+        </div>
+
+    {% elif user.student %}
+        <h2 class="text-2xl font-semibold text-primary-700">My Profile ({{ user.username }})</h2>
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200 text-sm">
+                <tbody class="divide-y divide-gray-100">
+                    <tr>
+                        <th class="text-left py-2 pr-4 font-medium text-gray-700">Name:</th>
+                        <td class="py-2">{{ user.student.name }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-left py-2 pr-4 font-medium text-gray-700">Class:</th>
+                        <td class="py-2">
+                            {{ user.student.CLASS }}
+                            {% if user.student.is_captain %} <span class="text-sm text-primary-600 font-medium">(Captain)</span>{% endif %}
                         </td>
                     </tr>
                     <tr>
-                        <th>Address:</th>
-                        <td>{{user.student.address}}</td>
+                        <th class="text-left py-2 pr-4 font-medium text-gray-700">Address:</th>
+                        <td class="py-2">{{ user.student.address }}</td>
                     </tr>
                     <tr>
-                        <th>Class Room:</th>
-                        <td>Room no:{{user.student.CLASS.room_number}},<br>Building no:{{user.student.CLASS.building_number}}</td>
+                        <th class="text-left py-2 pr-4 font-medium text-gray-700">Class Room:</th>
+                        <td class="py-2">Room no: {{ user.student.CLASS.room_number }},<br>Building no: {{ user.student.CLASS.building_number }}</td>
                     </tr>
-                    {%for contact in user.contactnumber_set.all%}
+                    {% for contact in user.contactnumber_set.all %}
                     <tr>
-                        <th>Contact {{ forloop.counter }}:</th>
-                        <td>{{contact}}</td>
+                        <th class="text-left py-2 pr-4 font-medium text-gray-700">Contact {{ forloop.counter }}:</th>
+                        <td class="py-2">{{ contact }}</td>
                     </tr>
-                    {%endfor%}
+                    {% endfor %}
                 </tbody>
             </table>
-            <br>
-            <br>
-            <a href="{%url 'Academics:update_student_profile'%}"><button> Update Profile </button></a><br><br>
-            <a href="{%url 'Academics:add_contact' %}"> Add a new Contact </a>
-    {%else%}<strong>You do not have a profile</strong> 
-    {%endif%}
-    </div>
+        </div>
+
+        <div class="mt-6 flex flex-col sm:flex-row gap-4">
+            <a href="{% url 'Academics:update_student_profile' %}" class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-md text-center">Update Profile</a>
+            <a href="{% url 'Academics:add_contact' %}" class="text-primary-600 hover:underline text-center">Add a new Contact</a>
+        </div>
+
+    {% else %}
+        <div class="text-red-600 font-medium">You do not have a profile</div>
+    {% endif %}
+</div>
 {% endblock %}

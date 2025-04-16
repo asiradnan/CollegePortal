@@ -3,53 +3,224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{%block title%}{%endblock%}</title>
-    <link rel="stylesheet" href="/static/CollegePortal/styles.css">
+    <title>{% block title %}{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Sora:wght@100..800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'cormorant': ['"Cormorant Garamond"', 'serif'],
+                        'sora': ['Sora', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        secondary: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body>
-    <header>
-        <h1>{%block header%}{%endblock%}</h1>
-    </header>
-    
-    <nav>
-        <ul>
-            <li>{% if user.is_authenticated%}
-                    {% if user.student%} 
-                        <a href="{% url 'Academics:user_profile' %}">{{user.username}}(Student)</a>
-                    {% elif user.teacher%}
-                    <a href="{% url 'Academics:user_profile' %}">{{user.username}}(Teacher)</a>  
-                    {% elif user.principal%}
-                    <a href="{% url 'Academics:user_profile' %}">{{user.username}}(Principal)</a>  
-                    {%elif user.is_staff%} {{user.username}}(Staff)
-                    {% else%} {{user.username}} (Guest)
-                    {%endif%}
-                {%else%} Not logged in
-                {%endif%}
-            </li>
-            <li><a href="{% url 'home'%}">Home</a></li>
-            <li><a href="{%url 'about'%}">About</a></li>
-            <li><a href="{%url 'contact_us'%}">Contact</a></li>
-            <li><a href="{%url 'Club:club_home'%}">Clubs</a></li>
-            <li><a href="{%url 'Notice:notice'%}">Notice</a> </li>
-            <li><a href="{%url 'PostsNQueries:PnQ_home'%}">Posts & Queries</a></li>
-            <li><a href="{% url 'Academics:departments'%}">Departments</a></li>
-            <li><a href="{% url 'Academics:classes'%}">Classes</a></li>
-            
-            
-            {% if user.is_authenticated%}<li> <a href="{%url 'account_logout'%}">Logout</a></li>
-            {%else%}<li><a href="{%url 'account_login'%}">Login</a></li>
-                    <li><a href="{%url 'account_signup'%}">Signup</a></li>
-            {%endif%}
-        </ul>      
+<body class="flex flex-col min-h-screen bg-gray-50 font-sora">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <span class="font-cormorant text-2xl font-bold text-primary-700">Alauddin Academy</span>
+                    </div>
+                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                        <a href="{% url 'home' %}" class="border-transparent text-gray-700 hover:text-primary-600 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Home</a>
+                        <a href="{% url 'about' %}" class="border-transparent text-gray-700 hover:text-primary-600 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">About</a>
+                        <a href="{% url 'contact_us' %}" class="border-transparent text-gray-700 hover:text-primary-600 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Contact</a>
+                        <a href="{% url 'Club:club_home' %}" class="border-transparent text-gray-700 hover:text-primary-600 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Clubs</a>
+                        <a href="{% url 'Notice:notice' %}" class="border-transparent text-gray-700 hover:text-primary-600 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Notice</a>
+                        <a href="{% url 'PostsNQueries:PnQ_home' %}" class="border-transparent text-gray-700 hover:text-primary-600 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Posts & Queries</a>
+                        <a href="{% url 'Academics:departments' %}" class="border-transparent text-gray-700 hover:text-primary-600 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Departments</a>
+                        <a href="{% url 'Academics:classes' %}" class="border-transparent text-gray-700 hover:text-primary-600 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Classes</a>
+                    </div>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                    {% if user.is_authenticated %}
+                        <div class="ml-3 relative group">
+                            <div>
+                                <button type="button" class="bg-white flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500" id="user-menu-button">
+                                    <span class="sr-only">Open user menu</span>
+                                    <div class="h-8 w-8 rounded-full bg-primary-200 flex items-center justify-center text-primary-700">
+                                        {{ user.username|slice:":1" }}
+                                    </div>
+                                </button>
+                            </div>
+                            <div class="hidden group-hover:block absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu">
+                                <div class="px-4 py-2 text-sm text-secondary-700">
+                                    {% if user.student %}
+                                    <a href="{% url 'Academics:user_profile' %}" class="hover:text-primary-700">{{user.username}} (Student)</a>
+                                    {% elif user.teacher %}
+                                    <a href="{% url 'Academics:user_profile' %}" class="hover:text-primary-700">{{user.username}} (Teacher)</a>
+                                    {% elif user.principal %}
+                                    <a href="{% url 'Academics:user_profile' %}" class="hover:text-primary-700">{{user.username}} (Principal)</a>
+                                    {% elif user.is_staff %}
+                                    <span>{{user.username}} (Staff)</span>
+                                    {% else %}
+                                    <span>{{user.username}} (Guest)</span>
+                                    {% endif %}
+                                </div>
+                                <a href="{% url 'account_logout' %}" class="block px-4 py-2 text-sm text-secondary-700 hover:bg-gray-100" role="menuitem">Logout</a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <a href="{% url 'account_login' %}" class="text-gray-700 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium">Login</a>
+                        <a href="{% url 'account_signup' %}" class="bg-primary-600 text-white hover:bg-primary-700 px-3 py-2 rounded-md text-sm font-medium">Sign up</a>
+                    {% endif %}
+                </div>
+                <div class="flex items-center sm:hidden">
+                    <!-- Mobile menu button -->
+                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500" id="mobile-menu-button">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile menu, show/hide based on menu state. -->
+        <div class="hidden sm:hidden" id="mobile-menu">
+            <div class="pt-2 pb-3 space-y-1">
+                <a href="{% url 'home' %}" class="bg-primary-50 border-primary-500 text-primary-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Home</a>
+                <a href="{% url 'about' %}" class="border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">About</a>
+                <a href="{% url 'contact_us' %}" class="border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Contact</a>
+                <a href="{% url 'Club:club_home' %}" class="border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Clubs</a>
+                <a href="{% url 'Notice:notice' %}" class="border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Notice</a>
+                <a href="{% url 'PostsNQueries:PnQ_home' %}" class="border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Posts & Queries</a>
+                <a href="{% url 'Academics:departments' %}" class="border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Departments</a>
+                <a href="{% url 'Academics:classes' %}" class="border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Classes</a>
+            </div>
+            <div class="pt-4 pb-3 border-t border-gray-200">
+                {% if user.is_authenticated %}
+                    <div class="flex items-center px-4">
+                        <div class="flex-shrink-0">
+                            <div class="h-10 w-10 rounded-full bg-primary-200 flex items-center justify-center text-primary-700">
+                                {{ user.username|slice:":1" }}
+                            </div>
+                        </div>
+                        <div class="ml-3">
+                            <div class="text-base font-medium text-gray-800">{{ user.username }}</div>
+                            <div class="text-sm font-medium text-gray-500">
+                                {% if user.student %}
+                                    Student
+                                {% elif user.teacher %}
+                                    Teacher
+                                {% elif user.principal %}
+                                    Principal
+                                {% elif user.is_staff %}
+                                    Staff
+                                {% else %}
+                                    Guest
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-3 space-y-1">
+                        {% if user.student or user.teacher or user.principal %}
+                            <a href="{% url 'Academics:user_profile' %}" class="block px-4 py-2 text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-100">Your Profile</a>
+                        {% endif %}
+                        <a href="{% url 'account_logout' %}" class="block px-4 py-2 text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-100">Logout</a>
+                    </div>
+                {% else %}
+                    <div class="space-y-1">
+                        <a href="{% url 'account_login' %}" class="block px-4 py-2 text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-100">Login</a>
+                        <a href="{% url 'account_signup' %}" class="block px-4 py-2 text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-100">Sign up</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
     </nav>
 
-    <section id="main-content" class="with-background">
-        {%block content%}
+    <!-- Page Header -->
+    <header class="bg-gradient-to-r from-primary-600 to-primary-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="font-cormorant text-4xl md:text-5xl font-bold">{% block header %}{% endblock %}</h1>
+        </div>
+    </header>
 
-        {%endblock%}
-    </section>
-    <footer>      
-        <p>&copy; 2023 Alauddin Academy. All rights reserved.</p>
+    <!-- Main Content -->
+    <main class="flex-grow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="md:flex md:justify-between">
+                <div class="mb-8 md:mb-0">
+                    <span class="font-cormorant text-2xl font-bold">Alauddin Academy</span>
+                    <p class="mt-2 text-sm text-gray-300">Empowering minds for a brighter future</p>
+                </div>
+                <div class="grid grid-cols-2 gap-8 sm:grid-cols-3">
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-300 uppercase tracking-wider">Resources</h3>
+                        <ul class="mt-4 space-y-4">
+                            <li><a href="{% url 'Academics:departments' %}" class="text-sm text-gray-300 hover:text-white">Departments</a></li>
+                            <li><a href="{% url 'Academics:classes' %}" class="text-sm text-gray-300 hover:text-white">Classes</a></li>
+                            <li><a href="{% url 'Club:club_home' %}" class="text-sm text-gray-300 hover:text-white">Clubs</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-300 uppercase tracking-wider">Community</h3>
+                        <ul class="mt-4 space-y-4">
+                            <li><a href="{% url 'PostsNQueries:PnQ_home' %}" class="text-sm text-gray-300 hover:text-white">Posts & Queries</a></li>
+                            <li><a href="{% url 'Notice:notice' %}" class="text-sm text-gray-300 hover:text-white">Notice Board</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-300 uppercase tracking-wider">Support</h3>
+                        <ul class="mt-4 space-y-4">
+                            <li><a href="{% url 'about' %}" class="text-sm text-gray-300 hover:text-white">About Us</a></li>
+                            <li><a href="{% url 'contact_us' %}" class="text-sm text-gray-300 hover:text-white">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-gray-700 pt-6">
+                <p class="text-sm text-gray-300">&copy; 2023 Alauddin Academy. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
+
+    <script>
+        // Simple toggle for mobile menu
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+    </script>
 </body>
 </html>

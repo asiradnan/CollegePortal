@@ -1,22 +1,41 @@
-{%extends 'base.html'%}
-{%load static%}
-{%block title%} About {%endblock%}
-{%block header%} About {%endblock%}
-{%block content%}
-<pre class="about"> 
-    Alauddin Academy is my CollegePortal's college name for my Database Course in BRAC University.
-
-    There is a reason behind choosing this name. My father is now retired and he started a kindergarten named 
-    'Principal Alauddin Academy' in our village home in 2022. His name is Mohammad Alauddin.
-    He is a retired Principal of Govt. College. 
-
-    This institution is located in Char Marteen, Kamalnagar Upazilla, Lakshmipur District.
-
-    Here is a picture of myself with my father in front of our little Academy.
-
-</pre>
-<figure class="about_img">
-    <img src="{%static '/CollegePortal/about1.jpeg'%}" alt="Picture in front of Principal Alauddin Academy" height="500px" width="700px"><br>
-    <figcaption>Me and my father in front of Principal Alauddin Academy</figcaption>
-</figure>
-{%endblock%}
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} About {% endblock %}
+{% block header %} About {% endblock %}
+{% block content %}
+<div class="max-w-4xl mx-auto">
+    <div class="bg-white rounded-lg shadow-md p-8 mb-8">
+        <h2 class="text-2xl font-cormorant font-bold text-primary-700 mb-6">Our Story</h2>
+        
+        <div class="prose text-gray-700 mb-8">
+            <p class="mb-4">
+                Alauddin Academy is my CollegePortal's college name for my Database Course in BRAC University.
+            </p>
+            
+            <p class="mb-4">
+                There is a reason behind choosing this name. My father is now retired and he started a kindergarten named 
+                'Principal Alauddin Academy' in our village home in 2022. His name is Mohammad Alauddin.
+                He is a retired Principal of Govt. College.
+            </p>
+            
+            <p class="mb-4">
+                This institution is located in Char Marteen, Kamalnagar Upazilla, Lakshmipur District.
+            </p>
+            
+            <p>
+                Here is a picture of myself with my father in front of our little Academy.
+            </p>
+        </div>
+        
+        <figure class="flex flex-col items-center">
+            <img src="{% static '/CollegePortal/about1.jpeg' %}" 
+                 alt="Picture in front of Principal Alauddin Academy" 
+                 class="rounded-lg shadow-md max-w-full h-auto"
+                 style="max-height: 500px; width: auto;">
+            <figcaption class="text-sm text-gray-600 mt-3">
+                Me and my father in front of Principal Alauddin Academy
+            </figcaption>
+        </figure>
+    </div>
+</div>
+{% endblock %}

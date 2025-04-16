@@ -85,14 +85,10 @@ WSGI_APPLICATION = 'CollegePortal.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': 'CollegeDatabase',
-    #     'HOST':'127.0.0.1',
-    #     'PORT':'3307',
-    #     'USER':'root',
-    #     'PASSWORD':''
-    # }
+     'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
 
@@ -150,15 +146,16 @@ AUTHENTICATION_BACKENDS = [
 ALLAUTH_SILENCED_WARNINGS = True
 LOGIN_REDIRECT_URL = '/'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-#EMAIL_HOST_USER = confidential 
-#EMAIL_HOST_PASSWORD = confidential
+EMAIL_HOST_USER = 'verifywithasir@gmail.com' 
+EMAIL_HOST_PASSWORD = 'gvbb rmse axev nnkl'
 UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_VERIFICATION = 'optional'
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 ACCOUNT_CONFIRM_EMAIL_ON_GET = False
 ACCOUNT_DELETE_METHOD = 'POST'
